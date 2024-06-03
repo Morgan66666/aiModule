@@ -1,21 +1,17 @@
-FROM continuumio/miniconda3
+FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY . /app
 
-# Configure conda to use conda-forge
-RUN conda config --add channels conda-forge && \
-    conda config --set channel_priority strict
-
-# Install the environment from environment.yml
-RUN conda env create -f environment.yml && conda clean -a -y
-
-# Make RUN commands use the new environment
-SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Expose port 5000
 EXPOSE 5000
 
 # Run the application
-CMD ["conda", "run", "-n", "myenv", "python", "main.py"]
+CMD ["python", "main.py"]
