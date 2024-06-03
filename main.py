@@ -39,6 +39,5 @@ def generate_content():
 #     model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 #     return jsonify({'message': 'API Key updated successfully'})
 
-
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0')
