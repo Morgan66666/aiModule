@@ -53,4 +53,4 @@ jobs:
           docker pull sustechcs304/aimodule:latest
           docker stop aimodule || true
           docker rm aimodule || true
-          docker run -d --name aimodule -p 50000:5000 -e API_KEY=${{ secrets.API_KEY }} your_dockerhub_username/your_repository:latest
+          docker run -d --name aimodule -p 50000:5000 -e API_KEY=${{ secrets.API_KEY }} sustechcs304/aimodule:latest
