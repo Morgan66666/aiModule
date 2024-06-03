@@ -4,6 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
+# Configure conda to use conda-forge
+RUN conda config --add channels conda-forge && \
+    conda config --set channel_priority strict
+
 # Install the environment from environment.yml
 RUN conda env create -f environment.yml && conda clean -a -y
 
